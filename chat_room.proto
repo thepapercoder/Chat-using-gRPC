@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.chatroom";
+option java_outer_classname = "ChatRoomProto";
+option objc_class_prefix = "RTG";
+
+package chatroom;
+
+service ChatRoom {
+    rpc RegisterUser (User) returns (Response) {}
+
+    rpc ListUser (Metadata) returns (stream User) {}
+
+    rpc SendMsg (stream Message) returns (Response) {}
+
+    rpc ReceiveMsg (User) returns (stream Message) {}
+
+}
+
+
+message Message {
+    string sender = 1;
+    string reciver = 2;
+    string msg = 3;
+    string time = 4;
+}
+
+message User {
+    string user_name = 1;
+}
+
+message Metadata {
+    int32 limit = 1;
+}
+
+message Response {
+    string res = 1;
+}
+
+
